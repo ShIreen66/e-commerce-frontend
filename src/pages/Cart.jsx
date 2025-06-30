@@ -33,47 +33,62 @@ const Cart = () => {
     );
 
     return (
-        <div className="p-6 max-w-4xl mx-auto">
-            <h1 className="text-2xl font-bold mb-6 text-gray-800">Your Cart</h1>
+        <div className="p-6 max-w-4xl mx-auto min-h-[70vh] bg-gradient-to-br from-indigo-50 via-white to-blue-50 rounded-3xl shadow-xl border border-indigo-100 mt-8">
+            <h1 className="text-3xl font-extrabold mb-8 text-indigo-700 text-center drop-shadow-md tracking-tight">
+                Your Cart
+            </h1>
 
             {user.cart.length === 0 ? (
-                <p className="text-gray-600 text-center">Your cart is empty.</p>
+                <div className="flex flex-col items-center justify-center py-16">
+                    <span className="material-icons text-6xl text-indigo-200 mb-4">
+                        remove_shopping_cart
+                    </span>
+                    <p className="text-gray-500 text-lg font-medium">
+                        Your cart is empty.
+                    </p>
+                </div>
             ) : (
                 user.cart.map((ci, i) => (
                     <div
                         key={i}
-                        className="flex flex-col md:flex-row items-center justify-between bg-white shadow-lg rounded-xl p-6 mb-6 border border-gray-100 hover:shadow-xl transition"
+                        className="flex flex-col md:flex-row items-center justify-between bg-white/90 shadow-lg rounded-2xl p-6 mb-6 border border-gray-100 hover:shadow-2xl transition relative overflow-hidden group"
                     >
+                        
+                        <span className="absolute top-4 left-4 bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full shadow group-hover:scale-110 transition-transform">
+                            x{ci.quantity}
+                        </span>
                         <div className="flex items-center w-full md:w-auto">
                             <img
                                 src={ci.product.image}
                                 alt={ci.product.title}
-                                className="h-24 w-24 object-contain rounded-lg bg-gray-50 border border-gray-200 mr-4"
+                                className="h-24 w-24 object-contain rounded-lg bg-gray-50 border border-gray-200 mr-4 drop-shadow group-hover:scale-105 transition-transform"
                             />
                             <div>
-                                <h2 className="text-lg font-bold text-gray-900 mb-1">
+                                <h2 className="text-lg font-bold text-indigo-700 mb-1 line-clamp-1">
                                     {ci.product.title}
                                 </h2>
                                 <p className="text-sm text-gray-500 mb-2">
                                     ₹ {ci.product.price}
                                 </p>
-                                <button
-                                    onClick={() => DecreaseQuantity(i)}
-                                    className="bg-red-100 text-red-600 px-2 py-1 rounded hover:bg-red-200 transition mr-2"
-                                    title="Remove one or delete item"
-                                >
-                                    <span className="font-bold">-</span>
-                                </button>
-                                <span className="px-3 text-gray-800 font-semibold text-base">
-                                    {ci.quantity}
-                                </span>
-                                <button
-                                    onClick={() => IncreaseQuantity(i)}
-                                    className="bg-green-100 text-green-600 px-2 py-1 rounded hover:bg-green-200 transition"
-                                    title="Add one more"
-                                >
-                                    <span className="font-bold">+</span>
-                                </button>
+                                <div className="flex items-center gap-2 mt-2">
+                                    <button
+                                        onClick={() => DecreaseQuantity(i)}
+                                        className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition shadow text-xl font-bold border-2 border-red-200 focus:outline-none focus:ring-2 focus:ring-red-300"
+                                        title="Remove one or delete item"
+                                    >
+                                        <span className="">-</span>
+                                    </button>
+                                    <span className="px-3 text-gray-800 font-semibold text-base">
+                                        {ci.quantity}
+                                    </span>
+                                    <button
+                                        onClick={() => IncreaseQuantity(i)}
+                                        className="flex items-center justify-center w-8 h-8 bg-green-100 text-green-600 rounded-full hover:bg-green-200 transition shadow text-xl font-bold border-2 border-green-200 focus:outline-none focus:ring-2 focus:ring-green-300"
+                                        title="Add one more"
+                                    >
+                                        <span className="">+</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div className="flex flex-col items-end mt-4 md:mt-0">
@@ -89,16 +104,16 @@ const Cart = () => {
             )}
 
             {user.cart.length > 0 && (
-                <div className="mt-8 flex flex-col items-end">
-                    <div className="bg-blue-50 rounded-lg px-6 py-4 shadow border border-blue-100">
-                        <h2 className="text-2xl font-bold text-blue-700 mb-1">
+                <div className="mt-10 flex flex-col items-end">
+                    <div className="bg-blue-50 rounded-xl px-8 py-6 shadow border border-blue-100 flex flex-col items-end">
+                        <h2 className="text-2xl font-bold text-blue-700 mb-1 tracking-tight">
                             Total
                         </h2>
-                        <span className="text-xl text-gray-800 font-semibold">
+                        <span className="text-2xl text-gray-800 font-extrabold">
                             ₹ {totalPrice}
                         </span>
                     </div>
-                    <button className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold shadow hover:bg-blue-700 transition">
+                    <button className="mt-8 bg-gradient-to-r from-indigo-500 to-blue-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:from-blue-500 hover:to-indigo-500 transition-all text-lg tracking-wide">
                         Proceed to Checkout
                     </button>
                 </div>

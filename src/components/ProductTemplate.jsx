@@ -1,12 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { asyncUpdateUser } from "../store/actions/userActions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductTemplate = ({ p }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { user } = useSelector((state) => state.userReducer);
 
     const AddToCartHandler = () => {
+        if (!user) {
+            toast.warn("Please sign in first", { position: "top-right" });
+            setTimeout(() => navigate("/signin"), 800);
+            return;
+        }
         const copyUser = { ...user, cart: [...user.cart] };
         const index = user.cart.findIndex((ci) => ci.product.id === p.id);
         if (index === -1) {
@@ -18,6 +26,8 @@ const ProductTemplate = ({ p }) => {
             };
         }
         dispatch(asyncUpdateUser(user.id, copyUser));
+        toast.success("Product added to cart", { position: "top-right" });
+        navigate("/cart");
     };
 
     return (

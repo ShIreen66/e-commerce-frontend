@@ -7,7 +7,7 @@ const Unauth = (props) => {
     const [checking, setChecking] = useState(true);
 
     useEffect(() => {
-        // Simulate async auth check
+        
         const timer = setTimeout(() => setChecking(false), 400);
         return () => clearTimeout(timer);
     }, []);

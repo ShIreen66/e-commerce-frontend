@@ -7,7 +7,6 @@ const Auth = (props) => {
     const [checking, setChecking] = useState(true);
 
     useEffect(() => {
-        // Simulate async auth check (e.g., from localStorage or API)
         const timer = setTimeout(() => setChecking(false), 400);
         return () => clearTimeout(timer);
     }, []);
