@@ -1,12 +1,55 @@
-# React + Vite
+# E-Commerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern e-commerce frontend application built with React, Redux, and Vite.
 
-Currently, two official plugins are available:
+## Features
+- User authentication (Sign in, Sign up)
+- Product listing and details
+- Shopping cart
+- Admin-only product creation
+- Responsive navigation bar
+- Settings and About pages
+- Infinite scrolling for products
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **React** for UI
+- **Redux** for state management
+- **React Router** for routing
+- **Vite** for fast development
+- **Tailwind CSS** for styling
+- **React Icons** for icons
 
-## Expanding the ESLint configuration
+## Folder Structure
+```
+src/
+  api/            # API configs
+  assets/         # Static assets
+  components/     # Reusable UI components
+  pages/          # Page components
+  routes/         # Route definitions
+  store/          # Redux store, actions, reducers
+  utils/          # Utility hooks and helpers
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+3. **Open in browser:**
+   Visit [http://localhost:5173](http://localhost:5173)
+
+## Scripts
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm run preview` — Preview production build
+
+## Notes
+- Only admin users can access the "Create Product" page.
+- The navigation bar adapts based on authentication and admin status.
+
