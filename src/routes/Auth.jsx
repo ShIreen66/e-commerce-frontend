@@ -3,28 +3,35 @@ import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Auth = (props) => {
-    const { user } = useSelector((state) => state.userReducer);
-    const [checking, setChecking] = useState(true);
+  const { user } = useSelector((state) => state.userReducer);
+  const [checking, setChecking] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => setChecking(false), 400);
-        return () => clearTimeout(timer);
-    }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setChecking(false), 400);
+    return () => clearTimeout(timer);
+  }, []);
 
-    if (checking) {
-        return (
-            <div className="flex items-center justify-center min-h-[60vh]">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mr-4"></div>
-                <span className="text-lg text-gray-600">Checking authentication...</span>
-            </div>
-        );
-    }
-    return user ? props.children : (
-        <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <p className="text-xl text-red-500 mb-4 font-semibold">You must be signed in to access this page.</p>
-            <Navigate to="/signin" />
-        </div>
+  if (checking) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mr-4"></div>
+        <span className="text-lg text-gray-600">Checking authentication...</span>
+      </div>
     );
+  }
+
+  const token = localStorage.getItem("token");
+
+  return user && token ? (
+    props.children
+  ) : (
+    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+      <p className="text-xl text-red-500 mb-4 font-semibold">
+        You must be signed in to access this page.
+      </p>
+      <Navigate to="/signin" />
+    </div>
+  );
 };
 
 export default Auth;

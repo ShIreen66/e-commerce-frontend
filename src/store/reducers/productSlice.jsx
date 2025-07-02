@@ -1,20 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    products: [],
+  products: [],
 };
 
 const productSlice = createSlice({
-    name: "product",
-    initialState,
-    reducers: {
-        loadProduct: (state, action) => {
-            state.products = action.payload;
-        },
-        lazyLoadProduct: (state, action) => {
-            state.products = [...state.products, ...action.payload];
-        },
+  name: "product",
+  initialState,
+  reducers: {
+    // ✅ Full Product Load (for initial load / refresh)
+    loadProduct: (state, action) => {
+      state.products = action.payload;
     },
+    // ✅ Lazy Load More Products (pagination / infinite scroll)
+    lazyLoadProduct: (state, action) => {
+      state.products = [...state.products, ...action.payload];
+    },
+  },
 });
+
 export default productSlice.reducer;
 export const { lazyLoadProduct, loadProduct } = productSlice.actions;
